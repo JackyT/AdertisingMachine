@@ -75,13 +75,15 @@ int main(int argc, char **argv)
 #if 1 
 	//char buf[BUFFER_SIZE] = "DELETE&vedio/David Garrett- -He s a Pirate(泡豆音乐!Paodo.com).flv";
 	//char buf[BUFFER_SIZE] = "get status";
-	char buf[BUFFER_SIZE] = "vedio list";
+	//char buf[BUFFER_SIZE] = "vedio list";
+	//char buf[BUFFER_SIZE] = "pt_step 1";
+	char buf[BUFFER_SIZE] = "pt_step -1";
+	
+	//char buf[BUFFER_SIZE] = "set msg&旁白君来啦，这次为大家带来了精彩的MTV和LIVE，请欣赏～～";
 	send(fd,buf,strlen(buf)+1,0);	
-	int size;
-	while((size = recv(fd,buf,BUFFER_SIZE,0))){
-		write(STDOUT_FILENO,buf,size);	
-		putchar('\n');	
-	}
+	//int size;
+	//size = recv(fd,buf,BUFFER_SIZE,0);
+	//write(STDOUT_FILENO,buf,size);	
 #else
 	char buf[BUFFER_SIZE] = "GET&picture1/upload.jpg";
 	send(fd,buf,strlen(buf)+1,0);	

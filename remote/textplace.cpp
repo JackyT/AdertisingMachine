@@ -45,6 +45,7 @@ void TextPlace::setmsg()		//设置文字内容
 }
 void TextPlace::change_content(QString str)
 {
+	qDebug() << "set content:" << str;
 	QFile textfile(TEXT_DISPLAY);
 	if(!textfile.open(QIODevice::WriteOnly | QIODevice::Truncate)){
 		qDebug() << "open doc/textdisplay failed";

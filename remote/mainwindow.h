@@ -27,7 +27,6 @@ public:
 	MainWindow(char *ip,QWidget *parent = 0);
 	~MainWindow();
 	void resizeEvent(QResizeEvent *event);
-	void vedioCmd(char *cmd);
 public slots:
 	void answerConnect(void);
 	void dataArrive(void);
