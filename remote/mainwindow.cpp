@@ -35,7 +35,7 @@ using namespace std;
 	//load text
 	//---------------------------------------------------
 	text = new TextPlace(this);
-	//QString Qstr = QString::fromUtf8("旁白君来啦，这期为大家带来经典MTV欣赏！");
+	//QString Qstr = QString::fromUtf8("Welcome to our Adertising Machine!");
 	//text->change_content(Qstr);
 	text->setmsg();
 

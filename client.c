@@ -8,30 +8,18 @@
 #include <arpa/inet.h>
 #include <string.h>
 #include <errno.h>
-#include <cgic.h>
 
 #define BUFFER_SIZE	4096
 
-int cgiMain(int argc, char **argv)
+int main(int argc, char **argv)
 {
 	int fd;
 	//unsigned short port = 8000;
 	unsigned short port = 9000;
-	char IP[] = "000.000.000.000";	
-	cgiHeaderContentType("text/html");
-	int file = open("IP_address",O_RDONLY);
-	if(file == -1){
-		fprintf(cgiOut,"get ip failed.\n");	
-		exit(1);
-	}
-	read(file,IP,15);
-	IP[15] = '\0';
-	//fprintf(cgiOut,"Open as given size %s x %s ,IP:",width,height);
-	//cgiHtmlEscape(IP);
-	cgiFormSubmitClicked("playback");
-	fprintf(cgiOut,"play back");
 
-#if 1 
+	//port = (unsigned short) strtol(argv[2], NULL, 10);
+
+
 	//------------------------------------------------------------------
 	// step 1, create socket
 	//------------------------------------------------------------------
@@ -42,7 +30,7 @@ int cgiMain(int argc, char **argv)
 		exit(1);
 	}
 
-	//fprintf(stdout, "[%d]New tcp socket created, fd = %d\n", getpid(), fd);
+	fprintf(stdout, "[%d]New tcp socket created, fd = %d\n", getpid(), fd);
 
 	//------------------------------------------------------------------
 	// step 2, connect
@@ -64,20 +52,19 @@ int cgiMain(int argc, char **argv)
 	remote_ipv4_address.sin_family = AF_INET;	// IPv4
 	remote_ipv4_address.sin_port = htons(port);	// network byte order
 	// int inet_pton(int af, const char *src, void *dst);
-	//inet_pton(AF_INET, argv[1], &remote_ipv4_address.sin_addr);
-	inet_pton(AF_INET,IP, &remote_ipv4_address.sin_addr);
+	inet_pton(AF_INET, argv[1], &remote_ipv4_address.sin_addr);
 
 	//int connect(int sockfd, const struct sockaddr *serv_addr, socklen_t addrlen);
 	if (connect(fd, (struct sockaddr *) &remote_ipv4_address, sizeof(remote_ipv4_address)) < 0)
 	{
 		// failed
-		//fprintf(stderr, "[%d]Connect to remote server %s:%d failed: %s\n", getpid(), IP, port, strerror(errno));
+		fprintf(stderr, "[%d]Connect to remote server %s:%d failed: %s\n", getpid(), argv[1], port, strerror(errno));
 		// FIXME: retry some times!
 		close(fd);
 		exit(1);
 	}
 
-	//fprintf(stdout, "[%d]Connected to %s:%d successfully.\n", getpid(), IP, port);
+	fprintf(stdout, "[%d]Connected to %s:%d successfully.\n", getpid(), argv[1], port);
 	//char buf[BUFFER_SIZE] = "START";
 	//char buf[BUFFER_SIZE] = "FULLSIZE";
 	//char buf[BUFFER_SIZE] = "CLOSE";
@@ -85,8 +72,6 @@ int cgiMain(int argc, char **argv)
 	//char buf[BUFFER_SIZE] = "ASSIZE|1024|768";
 	//char buf[BUFFER_SIZE] = "speed_mult 3\n";
 	//char buf[BUFFER_SIZE] = "speed_set 1\n";
-	//char buf[BUFFER_SIZE] = "pause\n";
-	//snprintf(buf,BUFFER_SIZE,"ASSIZE|%s|%s",width,height);
 #if 1 
 	//char buf[BUFFER_SIZE] = "DELETE&vedio/David Garrett- -He s a Pirate(泡豆音乐!Paodo.com).flv";
 	//char buf[BUFFER_SIZE] = "get status";
@@ -133,6 +118,5 @@ int cgiMain(int argc, char **argv)
 	close(fd);
 
 	return 0;
-#endif
 }
 
