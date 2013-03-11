@@ -160,22 +160,27 @@ int main(int argc, char **argv)
 			}
 			fprintf(stdout,"server:%s\n",buffer);
 			if(strncmp(buffer,CM_START,sizeof(CM_START)) == 0){
+				//receive command,start
 				if(remote_status == 0)
 					start_remote(buffer,NULL,NULL,argv[1]);	
 			}else if(strncmp(buffer,CM_FULLSIZE,sizeof(CM_FULLSIZE)) == 0){
+				//receive command,start as fullsize
 				if(remote_status == 1)
 					close_remote();	
 				start_remote(buffer,NULL,NULL,argv[1]);
 			}else if(strncmp(buffer,CM_CLOSE,sizeof(CM_CLOSE)) == 0){
+				//receive command,close remote
 				if(remote_status == 1)
 					close_remote();
 			}else if(strncmp(buffer,CM_RESTART,sizeof(CM_RESTART)) == 0){
+				//receive command,restart
 				if(remote_status == 1)
 					close_remote();
 				start_remote(CM_START,NULL,NULL,argv[1]);
 			}else{
 				char *w = strchr(buffer,'|');
 				if(w != NULL){
+					//receive command,open as size *|*
 					*w++ = '\0';
 					if(strncmp(buffer,CM_ASSIZE,sizeof(CM_ASSIZE)) == 0){
 						char *h = strchr(w,'|');	
@@ -186,6 +191,7 @@ int main(int argc, char **argv)
 					}
 				}else{
 					char *p = strchr(buffer,'&');
+					//receive command,file transmistion
 					if(p != NULL){
 						*p++ = '\0';
 						if(strncmp(buffer,CM_GET,sizeof(CM_GET)) == 0){
@@ -256,6 +262,7 @@ int getfile(char *path,int socket_fd)
 	fprintf(stdout,"download file succeed.\n");
 	return 0;
 }
+//start the ./remote/remote process with the parameters given
 void start_remote(char *cm,char *width,char *height,char *ip)
 {
 	pid_t pid;
@@ -281,6 +288,7 @@ void start_remote(char *cm,char *width,char *height,char *ip)
 	qt_pid = pid;
 	remote_status = 1;
 }
+//close remote
 int close_remote(void)
 {
 	if(remote_status == 0 || qt_pid == 0)

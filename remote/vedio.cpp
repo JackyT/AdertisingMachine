@@ -13,6 +13,7 @@ Vedio::~Vedio()
 {
 	delete v_proc;
 }
+//read from the vedio director,and set the mplayer parameters
 void Vedio::vedio_display(void)
 {
 	QStringList args;
@@ -68,6 +69,7 @@ void Vedio::readFromMplayer()
 	parent_socket = NULL;
 }
 #endif
+//mplayer receive the single port command
 void Vedio::rec_com(QByteArray str)
 {
 	v_proc->write(str);	

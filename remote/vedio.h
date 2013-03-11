@@ -17,12 +17,7 @@ public:
 	~Vedio();
 	void vedio_display(void);
 	void rec_com(QByteArray str);
-	//void vedio_status(char *str,int size);
 	QProcess *v_proc;
-	//QTcpSocket *parent_socket;
-public slots:
-	//void readFromMplayer(void);
-	//void readUnusedMsg(void);
 private:
 	QStringList vedio_list;
 	int vedio_sum;

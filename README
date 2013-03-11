@@ -1,0 +1,10 @@
+这是广告机系统的前端程序。
+
+需求的环境:mplayer，自行下载mplayer源码包，编译后，拷贝mplayer可执行文件到/user/bin或者remote目录下。
+请事先添加视频文件到remote/vedio文件夹里，图片到remote/picture1,remote/picture2中。
+
+下载源码后，请先编译。然后在执行./server <IP>。请指定本机的ip地址。
+
+client 目录下有个cgis目录，含有10多个cgi测试程序。分别是close,open,restart,fullsize start,start as given size,get the current vedio file name,delete file,upload file,set the text content,vedio play speed up/slow down,see the vedio list,vedio play pause,vedio play next/back,and so on.
+执行cgi命令时，请指定想要控制的remote主机的IP，格式为：./<cgis> <IP>
+

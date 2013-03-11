@@ -26,7 +26,7 @@ Picture::~Picture()
 		delete pic_map[i];
 	delete[] pic_map;
 }
-
+//read pictures from the path
 void Picture::loadpicture(QString pic_path)
 {
 	QDir dir(pic_path);		
@@ -47,6 +47,7 @@ void Picture::loadpicture(QString pic_path)
 	}
 
 }
+//pixmap the picture 
 void Picture::showpicture(void)
 {
 	cur_show += 1;

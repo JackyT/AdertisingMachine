@@ -30,7 +30,7 @@ public:
 public slots:
 	void answerConnect(void);
 	void dataArrive(void);
-	void readUnusedMsg(void);
+	void readUnusedMsg(void); //read the unused mesage
 	void readFromMplayer(void);
 private:
 	QLabel *background;

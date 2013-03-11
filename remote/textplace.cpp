@@ -28,7 +28,7 @@ TextPlace::TextPlace(QWidget *parent)
 	smoothness = 3;		
 }
 
-void TextPlace::setmsg()		//设置文字内容
+void TextPlace::setmsg()		//read the text display file
 {
 	QString msg;
 	QFile textfile(TEXT_DISPLAY);
@@ -43,7 +43,7 @@ void TextPlace::setmsg()		//设置文字内容
 	text->setText(msg);
 	textwidth = text->fontMetrics().width(text->text()) * 1;
 }
-void TextPlace::change_content(QString str)
+void TextPlace::change_content(QString str) //change the file content,program read this file's content as the text
 {
 	qDebug() << "set content:" << str;
 	QFile textfile(TEXT_DISPLAY);
@@ -51,7 +51,7 @@ void TextPlace::change_content(QString str)
 		qDebug() << "open doc/textdisplay failed";
 		exit(2);
 	}else{
-		QTextStream out(&textfile);		
+		QTextStream out(&textfile);	
 		out << str;	
 	}
 	textfile.close();
